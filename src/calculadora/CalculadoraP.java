@@ -1,5 +1,7 @@
 package calculadora;
 
+import javax.swing.ImageIcon;
+
 public class CalculadoraP extends javax.swing.JFrame {
 
     static String partA = "";
@@ -8,6 +10,7 @@ public class CalculadoraP extends javax.swing.JFrame {
     public CalculadoraP() {
         initComponents();
         setLocationRelativeTo(null); //Centrar al arrancar calculadora
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoSW3.png")).getImage()); //Establecer icono del paneñ
     }
     
     //Metodos necesarios personales
@@ -15,7 +18,7 @@ public class CalculadoraP extends javax.swing.JFrame {
         txtOperaciones.setText(txtOperaciones.getText() + termino);
     }
     
-    public void comprobarDatos() {
+    public void comprobarDatos() { //Ajustes para elegir como mostrar los digitos en pantalla
         if(txtResultados.getText().toString() != "")
         {
             if(txtOperaciones.getText().toString() == "")
@@ -94,11 +97,11 @@ public class CalculadoraP extends javax.swing.JFrame {
 
         btnI.setFont(new java.awt.Font("RobotoLight", 1, 18)); // NOI18N
         btnI.setForeground(new java.awt.Color(255, 255, 255));
-        btnI.setIcon(new javax.swing.ImageIcon("/media/Backup/Escritorio/botonIgual.png")); // NOI18N
+        btnI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botonIgual.png"))); // NOI18N
         btnI.setText("=");
         btnI.setFocusPainted(false);
         btnI.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnI.setRolloverIcon(new javax.swing.ImageIcon("/media/Backup/Escritorio/botonIgualFocus.png")); // NOI18N
+        btnI.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/botonIgualFocus.png"))); // NOI18N
         btnI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIActionPerformed(evt);
@@ -315,7 +318,7 @@ public class CalculadoraP extends javax.swing.JFrame {
 
     private void btnIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIActionPerformed
         int res=0;
-        switch(operador) {
+        switch(operador) { //Determinar que tipo de acion se va a realizar con la informacion del momento
             case 1:
                 res = Integer.parseInt(partA) * Integer.parseInt(txtOperaciones.getText().toString());
                 break;

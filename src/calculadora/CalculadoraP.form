@@ -100,13 +100,13 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/media/Backup/Escritorio/botonIgual.png"/>
+              <Image iconType="3" name="/imagenes/botonIgual.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="="/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/media/Backup/Escritorio/botonIgualFocus.png"/>
+              <Image iconType="3" name="/imagenes/botonIgualFocus.png"/>
             </Property>
           </Properties>
           <Events>
