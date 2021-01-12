@@ -1,39 +1,26 @@
 package calculadora;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.ImageIcon;
 
 public class CalculadoraP extends javax.swing.JFrame {
-
-    static String partA = "";
-    static int operador = 0;
+    
+    ScriptEngineManager sem = new ScriptEngineManager();
+    ScriptEngine se = sem.getEngineByName("JavaScript");
     
     public CalculadoraP() {
         initComponents();
         setLocationRelativeTo(null); //Centrar al arrancar calculadora
-        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoSW3.png")).getImage()); //Establecer icono del paneñ
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/logoSW2.png")).getImage()); //Establecer icono del paneñ
     }
     
     //Metodos necesarios personales
     public void agregarTermino(String termino) {
         txtOperaciones.setText(txtOperaciones.getText() + termino);
-    }
-    
-    public void comprobarDatos() { //Ajustes para elegir como mostrar los digitos en pantalla
-        if(txtResultados.getText().toString() != "")
-        {
-            if(txtOperaciones.getText().toString() == "")
-            {
-                partA = txtResultados.getText().toString();
-                txtResultados.setText("");
-            } else {
-                partA = txtOperaciones.getText();
-                txtOperaciones.setText("");
-                txtResultados.setText("");
-            }
-        } else {
-            partA = txtOperaciones.getText();
-            txtOperaciones.setText("");
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -312,43 +299,28 @@ public class CalculadoraP extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDActionPerformed
-        comprobarDatos();
-        operador = 4;
+        agregarTermino("/");
     }//GEN-LAST:event_btnDActionPerformed
 
     private void btnIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIActionPerformed
-        int res=0;
-        switch(operador) { //Determinar que tipo de acion se va a realizar con la informacion del momento
-            case 1:
-                res = Integer.parseInt(partA) * Integer.parseInt(txtOperaciones.getText().toString());
-                break;
-            case 2:
-                res = Integer.parseInt(partA) - Integer.parseInt(txtOperaciones.getText().toString());
-                break;
-            case 3:
-                res = Integer.parseInt(partA) + Integer.parseInt(txtOperaciones.getText().toString());
-                break;
-            case 4:
-                res = Integer.parseInt(partA) / Integer.parseInt(txtOperaciones.getText().toString());
-                break;
+        try {
+            String res = se.eval(txtOperaciones.getText()).toString(); //Usar moto de JS para evaluar lo contenido en el panel
+            txtResultados.setText(res); //Mandarlo al panel resultado
+        } catch (ScriptException ex) {
+            txtResultados.setText("¡ERROR!");
         }
-        txtOperaciones.setText("");
-        txtResultados.setText(String.valueOf(res));
     }//GEN-LAST:event_btnIActionPerformed
 
     private void btnMulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMulActionPerformed
-        comprobarDatos();
-        operador = 1;
+        agregarTermino("*");
     }//GEN-LAST:event_btnMulActionPerformed
 
     private void btnMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosActionPerformed
-        comprobarDatos();
-        operador = 2;
+        agregarTermino("-");
     }//GEN-LAST:event_btnMenosActionPerformed
 
     private void btnSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSActionPerformed
-        comprobarDatos();
-        operador = 3;
+        agregarTermino("+");
     }//GEN-LAST:event_btnSActionPerformed
 
     private void btnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCActionPerformed
